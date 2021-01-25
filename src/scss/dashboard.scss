@@ -36,7 +36,7 @@
     border-radius: 4px;
     border: 1px solid #dadce0;
     box-shadow: 0 2px 3px 1px rgba(60, 64, 67, 0.15);
-    transition: all 0.3s ease-in-out;
+    transition: $transition;
 
     &:hover {
       color: green;
@@ -75,7 +75,7 @@
     align-items: center;
     margin-bottom: 10px;
     padding: 12px 14px 12px 16px;
-    transition: all 0.3s ease-in-out;
+    transition: $transition;
 
     &:hover {
       background: #e6f4ea;
