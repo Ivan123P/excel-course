@@ -43,6 +43,58 @@ class Dom {
   off(eventType, callback) {
     this.$el.removeEventListener(eventType, callback);
   }
+
+  css(styles = {}) {
+    // for (let cssKey in styles) {
+    //   if (styles.hasOwnProperty(cssKey)) {
+    //     this.$el.style[cssKey] = styles[cssKey];
+    //   }
+    // }
+
+    Object
+      .keys(styles)
+      .forEach(key => {
+        this.$el.style[key] = styles[key];
+      });
+
+    return this;
+  }
+
+  get data() {
+    return this.$el.dataset;
+  }
+
+  findAll(selector) {
+    return this.$el.querySelectorAll(selector);
+  }
+
+  closest(selector) {
+    return $(this.$el.closest(selector));
+  }
+
+  addClass(className) {
+    const classes = className.split(' ');
+
+    for (let i = 0; i < classes.length; i++) {
+      this.$el.classList.add(classes[i]);
+    }
+
+    return this;
+  }
+
+  removeClass(className) {
+    const classes = className.split(' ');
+
+    for (let i = 0; i < classes.length; i++) {
+      this.$el.classList.remove(classes[i]);
+    }
+
+    return this;
+  }
+
+  getCoords() {
+    return this.$el.getBoundingClientRect();
+  }
 }
 
 // event.target

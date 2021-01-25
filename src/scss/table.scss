@@ -9,13 +9,47 @@
   padding-bottom: 2px;
   overflow-x: auto;
 
+  .column-resize,
+  .row-resize {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    opacity: 0;
+    background: $primary-color;
+    // transition: $transition;
+
+    &::after {
+      content:'';
+      position: absolute;
+      background: $primary-color;
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &.is_active {
+      opacity: 1;
+
+      &.column-resize::after,
+      &.row-resize::after {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+
   .row  {
     display: flex;
     flex-direction: row;
-    min-height: 20px;
+    min-height: 24px;
     height: $row-height;
 
     &-info {
+      position: relative;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -31,6 +65,7 @@
     }
 
     .column {
+      position: relative;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -41,6 +76,25 @@
       border: 1px solid $border-color;
       border-top: none;
       border-left: none;
+
+      &-resize {
+        top: 0;
+        transform: translateX(50%);
+        width: 4px;
+
+        &::after {
+          top: 100%;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 1px;
+          height: 100vh;
+        }
+
+        &:hover {
+          opacity: 1;
+          cursor: col-resize;
+        }
+      }
     }
 
     .cell {
@@ -59,7 +113,25 @@
       &.selected {
         z-index: 2;
         border: none;
-        outline: 2px solid #3c74ff;
+        outline: 2px solid $primary-color;
+      }
+    }
+
+    &-resize {
+      left: 0;
+      transform: translateY(50%);
+      height: 4px;
+
+      &::after {
+        left: 100%;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 100vw;
+        height: 1px;
+      }
+
+      &:hover {
+        cursor: row-resize;
       }
     }
   }
