@@ -16,6 +16,20 @@ class Dom {
     return this.$el.outerHTML.trim();
   }
 
+  text(text) {
+    if (typeof text === 'string') {
+      this.$el.textContent = text;
+
+      return this;
+    }
+
+    if (this.$el.tagName.toLowerCase() === 'input') {
+      return this.$el.value.trim();
+    }
+
+    return this.$el.textContent.trim();
+  }
+
   clear() {
     this.html('');
 
@@ -45,6 +59,7 @@ class Dom {
   }
 
   css(styles = {}) {
+    // BAD - cause 'in' shows all properties, include - own obj, parent, parent...
     // for (let cssKey in styles) {
     //   if (styles.hasOwnProperty(cssKey)) {
     //     this.$el.style[cssKey] = styles[cssKey];
@@ -64,6 +79,10 @@ class Dom {
     return this.$el.dataset;
   }
 
+  find(selector) {
+    return $(this.$el.querySelector(selector));
+  }
+
   findAll(selector) {
     return this.$el.querySelectorAll(selector);
   }
@@ -79,6 +98,22 @@ class Dom {
       this.$el.classList.add(classes[i]);
     }
 
+    return this;
+  }
+
+  id(parse) {
+    if (parse) {
+      const parsed = this.id().split(':');
+      return {
+        row: +parsed[0],
+        col: +parsed[1]
+      }
+    }
+    return this.data.id;
+  }
+
+  focus() {
+    this.$el.focus();
     return this;
   }
 
