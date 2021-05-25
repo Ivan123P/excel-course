@@ -13,6 +13,14 @@
   border-bottom: 1px solid $border-color;
 
   & .button {
-    @include button(green);
+    @include button(#30a736);
+
+    &--controls {
+      opacity: 0.35;
+
+      &:active, &.active {
+        opacity: 1;
+      }
+    }
   }
 }
